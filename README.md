@@ -39,8 +39,14 @@ The `BASIC` authentication can be done by providing following credentials:
 * password: `Pa$$w0rd`
 
 In addition, the client application has to visit the following link, and provide user credentials (e.g. email and password of a normal user)
-to receive a valid response: `POST` https://localhost:8080/oauth/token?grant_type=password&username=bill&password=abc123
+to receive a valid response: `POST` [https://localhost:8080/oauth/token?grant_type=password&username=bill&password=abc123](https://localhost:8080/oauth/token?grant_type=password&username=bill&password=abc123)
 The username, in this example, is `bill` and the password is `abc123`.
+
+__ATTENTION__:
+In order to try out this application, you can use the following credentials:
+* email(which is the username): amar.bajric@gmail.com
+* password: password
+
 Now the `OAuth2 Authorization Server` will see, that a known client application is asking for a token, and will grant access to the `Authorization Server`.
 With the username (can also be email later on) and the password provided in the `URL`, `OAuth2` checks if there is a user with this credentials. If this is true, the
 response will look something like this:

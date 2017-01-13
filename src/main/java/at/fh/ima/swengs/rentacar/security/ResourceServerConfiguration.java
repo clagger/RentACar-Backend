@@ -22,9 +22,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity http) throws Exception {
         http.
         anonymous().disable().requestMatchers()
-        .antMatchers("/cars/**","/customers/**","rentedCars/**","/profile/*")
+        .antMatchers("/cars/**","/customers/**","/rentedCars/**","/profile/*")
         .and().authorizeRequests()
-        .antMatchers("/cars/**","/customers/**","rentedCars/**","/profile/*").access("hasRole('ADMIN')")
+        .antMatchers("/cars/**","/customers/**","/rentedCars/**").access("hasRole('ADMIN') or hasRole('USER')")
+        .antMatchers("/profile/*").access("hasRole('ADMIN')")
         .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
  

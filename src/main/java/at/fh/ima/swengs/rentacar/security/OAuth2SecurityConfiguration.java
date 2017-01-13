@@ -1,5 +1,6 @@
 package at.fh.ima.swengs.rentacar.security;
 
+import at.fh.ima.swengs.rentacar.model.Customers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
@@ -21,8 +24,6 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
  * Gluing everything together. Endpoint /oauth/token is used to request a token [access or refresh].
  * Resource owners [bill,bob] are configured here itself.
  */
-//TODO: Implement the access to database for real users => e.g. Customers
-
 
 
 @Configuration
@@ -31,12 +32,19 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
  
     @Autowired
     private ClientDetailsService clientDetailsService;
+
+    @Autowired
+    private Customers customers;
      
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
+        auth
+            .userDetailsService(customers)
+            .passwordEncoder(passwordEncoder());
+
+        /*inMemoryAuthentication()
         .withUser("bill").password("abc123").roles("ADMIN").and()
-        .withUser("bob").password("abc123").roles("USER");
+        .withUser("bob").password("abc123").roles("USER");*/
     }
  
     @Override
@@ -53,7 +61,12 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
- 
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
  
     @Bean
     public TokenStore tokenStore() {
