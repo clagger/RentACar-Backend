@@ -22,7 +22,7 @@ _Author: Amar Bajric_
 ##Usage:
 In order to run the application, simply execute the `main()` method (located in the `RentACarBackendApplication`).
 The application will expose data with the `HATEOAS` standard. You can access the `REST API` by opening the following link
-in your web browser, or by sending a GET Method with Postman: https://lcoalhost:8080/
+in your web browser, or by sending a GET Method with Postman: [https://lcoalhost:8080/](https://lcoalhost:8080/)
 By default, you will only be eligible to access the root path of the `REST API`. If you are trying to access subpaths
 you will receive the following:
 
@@ -63,4 +63,4 @@ response will look something like this:
 
 With the `access_token` the client application can now make all actions.
 The token has to be appended after the link itself:
-https://localhost:8080/cars/?access_token=6317b0b4-ecb0-49af-a266-c6746b98caa3
+__https://localhost:8080/cars/?access_token=6317b0b4-ecb0-49af-a266-c6746b98caa3__
