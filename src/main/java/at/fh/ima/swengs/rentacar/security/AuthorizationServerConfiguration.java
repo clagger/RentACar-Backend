@@ -19,7 +19,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  */
 /*
  * - Registers a client with client-id ‘my-trusted-client-app’ and password ‘Pa$$w0rd’ and roles & scope he is allowed for.
- * - Specifies that any generated access token will be valid for only 3 hours
+ * - Specifies that any generated access token will be valid for only one and a half (1h30min) hours
  * - Specifies that any generated refresh token will be valid for ten hours (only used with grant_type = password)
  */
 
@@ -48,7 +48,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
             .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
             .scopes("read", "write", "trust")
             .secret("Pa$$w0rd")
-            .accessTokenValiditySeconds(3600).//Access token is only valid for one hour.
+            .accessTokenValiditySeconds(5400).//Access token is only valid for one and a half hours.
             refreshTokenValiditySeconds(10800);//Refresh token is valid for three hours.
     }
  
