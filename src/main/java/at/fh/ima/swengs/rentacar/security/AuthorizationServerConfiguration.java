@@ -18,17 +18,16 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  * It also contains information about registered clients (e.g. Angular app) and possible access scopes and grant types.
  */
 /*
- * - Registers a client with client-id ‘my-trusted-client’ and password ‘Pa$$w0rd’ and roles & scope he is allowed for.
- * - Specifies that any generated access token will be valid for only 120 seconds
- * - Specifies that any generated refresh token will be valid for only 600 seconds
+ * - Registers a client with client-id ‘my-trusted-client-app’ and password ‘Pa$$w0rd’ and roles & scope he is allowed for.
+ * - Specifies that any generated access token will be valid for only 3 hours
+ * - Specifies that any generated refresh token will be valid for ten hours (only used with grant_type = password)
  */
 
 
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
- 
-    private static String REALM="MY_OAUTH_REALM";
+
      
     @Autowired
     private TokenStore tokenStore;
@@ -61,7 +60,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
  
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.realm(REALM+"/client");
+        oauthServer
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()");
     }
  
 }
