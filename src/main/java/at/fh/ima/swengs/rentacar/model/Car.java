@@ -15,7 +15,7 @@ public class Car {
 
     private String brand;
     private String model;
-    private int kilometres;
+    private int kilometers;
     private int seatNumber;
     private String color;
     private String constructionYear;
@@ -33,7 +33,7 @@ public class Car {
     public Car(String brand, String model, int kilometres, int seatNumber, String color, String constructionYear, String gasType, String transmission, int horsePower) {
         this.brand = brand;
         this.model = model;
-        this.kilometres = kilometres;
+        this.kilometers = kilometers;
         this.seatNumber = seatNumber;
         this.color = color;
         this.constructionYear = constructionYear;
@@ -67,12 +67,12 @@ public class Car {
         this.model = model;
     }
 
-    public int getKilometres() {
-        return kilometres;
+    public int getKilometers() {
+        return kilometers;
     }
 
-    public void setKilometres(int kilometres) {
-        this.kilometres = kilometres;
+    public void setKilometers(int kilometres) {
+        this.kilometers = kilometers;
     }
 
     public int getSeatNumber() {
