@@ -30,7 +30,7 @@ public class Car {
     public Car() {
     }
 
-    public Car(String brand, String model, int kilometres, int seatNumber, String color, String constructionYear, String gasType, String transmission, int horsePower) {
+    public Car(String brand, String model, int kilometers, int seatNumber, String color, String constructionYear, String gasType, String transmission, int horsePower) {
         this.brand = brand;
         this.model = model;
         this.kilometers = kilometers;
