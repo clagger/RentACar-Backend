@@ -4,6 +4,7 @@ import at.fh.ima.swengs.rentacar.util.JsonDateDeserializer;
 import at.fh.ima.swengs.rentacar.util.JsonDateSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -35,7 +36,7 @@ public class Customer {
 
     private String driverLicenseNumber;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
@@ -54,7 +55,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, Date birthDate, String email, String address, String phoneNumber, String driverLicenseNumber) {
+    public Customer(String firstName, String lastName, Date birthDate, String email, String address, String phoneNumber, String driverLicenseNumber,String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -62,6 +63,7 @@ public class Customer {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.driverLicenseNumber = driverLicenseNumber;
+        this.password = password;
     }
 
     public long getId() {
@@ -118,6 +120,14 @@ public class Customer {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getDriverLicenseNumber() {
