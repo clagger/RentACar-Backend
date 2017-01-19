@@ -20,7 +20,7 @@ public class CorsFilterBean {
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
             CorsConfiguration config = new CorsConfiguration();
             config.setAllowCredentials(true);
-            config.addAllowedOrigin("http://localhost:8081");
+            config.addAllowedOrigin("*");
             config.setAllowedMethods(Arrays.asList("OPTIONS", "GET", "POST", "PUT", "DELETE"));
             config.addAllowedHeader("*");
 //            config.addAllowedMethod("*");

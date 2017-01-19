@@ -12,7 +12,6 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String brand;
     private String model;
     private int kilometers;
@@ -30,7 +29,8 @@ public class Car {
     public Car() {
     }
 
-    public Car(String brand, String model, int kilometers, int seatNumber, String color, String constructionYear, String gasType, String transmission, int horsePower) {
+    public Car(long id,String brand, String model, int kilometers, int seatNumber, String color, String constructionYear, String gasType, String transmission, int horsePower) {
+        this.id = id;
         this.brand = brand;
         this.model = model;
         this.kilometers = kilometers;
@@ -40,6 +40,7 @@ public class Car {
         this.gasType = gasType;
         this.transmission = transmission;
         this.horsePower = horsePower;
+
     }
 
 
