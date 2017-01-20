@@ -19,7 +19,7 @@ import java.util.List;
 @RepositoryRestResource
 public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
 
-    //This would be exposed under the URL: http://localhost:8080/customers/search/findByFirstNameAndLastName
+    //This would be exposed under the URL: http://localhost:8080/customers/search/findByFirstNameAndLastName?firstName="NAME"&lastName="NAME"
     public List<Customer> findByFirstNameAndLastName(@Param("firstName") String firstName, @Param("lastName")String lastName);
 
 }
