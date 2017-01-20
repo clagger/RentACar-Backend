@@ -23,6 +23,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
+        .csrf().disable()
         .anonymous().and().authorizeRequests()
         .antMatchers(HttpMethod.POST,"/customers").authenticated()
 
