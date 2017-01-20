@@ -15,7 +15,3 @@ public class RentACarBackendApplication {
     }
 
 }
-
-
-//TODO: Change grantType from password to implicit (use access token in header)
-//TODO: See Class 'Customers' => change when someone gets ROLE_ADMIN (e.g. if endsWith is not good solution)
