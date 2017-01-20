@@ -9,9 +9,8 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
-/**
- * Created by simon41 on 12/18/2016.
- */
+
+
 @Configuration
 public class CorsFilterBean {
 
