@@ -1,7 +1,9 @@
 package at.fh.ima.swengs.rentacar.security;
  
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
@@ -20,13 +22,20 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
  
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.
-        anonymous().disable().requestMatchers()
-        .antMatchers("/cars/**","/customers/**","/rentedCars/**","/profile/*")
+        http
+        .anonymous().and().authorizeRequests()
+        .antMatchers(HttpMethod.POST,"/customers").authenticated()
+
+        .and().anonymous().disable().requestMatchers()
+        .antMatchers(HttpMethod.GET,"/customers/**","/cars/**","/rentedCars/**","/profile/*")
+        .antMatchers(HttpMethod.DELETE,"/customers/*","/cars/*","/rentedCars/*","/profile/*")
+        .antMatchers(HttpMethod.PUT,"/customers/*","/cars/*","/rentedCars/*","/profile/*")
+        .antMatchers(HttpMethod.POST,"/cars","/rentedCars","/profile/*")
         .and().authorizeRequests()
         .antMatchers("/cars/**","/customers/**","/rentedCars/**").access("hasRole('ADMIN') or hasRole('USER')")
         .antMatchers("/profile/**").access("hasRole('ADMIN')")
         .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
- 
+
+
 }
