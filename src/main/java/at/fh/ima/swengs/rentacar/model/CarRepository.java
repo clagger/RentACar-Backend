@@ -16,6 +16,8 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
     //This would be exposed under localhost:8080/cars/search/findByBrand?brand="BRANDNAME"
     public List<Car> findByBrand(@Param("brand") String brand);
 
+    public Car findById(@Param("id") long id);
+
     public List<Car> findByModel(@Param("model") String model);
 
     public List<Car> findBySeatNumber(@Param("seatNumber") int seatNumber);
