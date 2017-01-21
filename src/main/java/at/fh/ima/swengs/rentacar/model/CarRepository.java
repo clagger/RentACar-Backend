@@ -28,4 +28,7 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
 
     @Query(value = "SELECT c.* from car c JOIN rented_car rc on c.id = rc.car_id WHERE rc.customer_id = ?1", nativeQuery = true)
     public List<Car> findByCustomer(@Param("customer") int customer);
+
+    @Query(value = "Select * from car as c LEFT OUTER JOIN rented_car rc ON c.id = rc.car_id and rc.customer_id = ?1 where rc.car_id is null", nativeQuery = true)
+    public List<Car> findAllAvailableCars(@Param("customer") int customer);
 }
