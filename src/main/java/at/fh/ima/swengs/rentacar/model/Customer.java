@@ -2,6 +2,7 @@ package at.fh.ima.swengs.rentacar.model;
 
 import at.fh.ima.swengs.rentacar.util.JsonDateDeserializer;
 import at.fh.ima.swengs.rentacar.util.JsonDateSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -36,7 +37,6 @@ public class Customer {
 
     private String driverLicenseNumber;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
