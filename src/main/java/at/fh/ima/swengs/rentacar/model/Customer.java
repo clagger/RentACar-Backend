@@ -3,10 +3,11 @@ package at.fh.ima.swengs.rentacar.model;
 import at.fh.ima.swengs.rentacar.util.JsonDateDeserializer;
 import at.fh.ima.swengs.rentacar.util.JsonDateSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,7 +22,7 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     private String firstName;
@@ -36,7 +37,6 @@ public class Customer {
 
     private String driverLicenseNumber;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
@@ -55,7 +55,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, Date birthDate, String email, String address, String phoneNumber, String driverLicenseNumber,String password) {
+    public Customer(String firstName, String lastName, Date birthDate, String email, String address, String phoneNumber, String driverLicenseNumber, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -122,20 +122,22 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getDriverLicenseNumber() {
         return driverLicenseNumber;
     }
 
     public void setDriverLicenseNumber(String driverLicenseNumber) {
         this.driverLicenseNumber = driverLicenseNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        this.password = hashedPassword;
     }
 
     public List<RentedCar> getRentedCars() {

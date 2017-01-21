@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class RentedCar {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     @ManyToOne(targetEntity = Customer.class)

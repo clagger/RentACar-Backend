@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Created by Amar on 12.01.2017.
  */
+
 @RepositoryRestResource
 public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
 
