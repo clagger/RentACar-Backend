@@ -14,9 +14,6 @@ import java.util.List;
 @RepositoryRestResource
 public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
 
-    //This would be exposed under localhost:8080/cars/search/findByBrand?brand="BRANDNAME"
-    public List<Car> findByBrand(@Param("brand") String brand);
-
     public Car findById(@Param("id") long id);
 
     @Query(value = "Select * from car as c LEFT OUTER JOIN rented_car rc ON c.id = rc.car_id and rc.customer_id = ?1 where rc.car_id is null and c.model = ?2", nativeQuery = true)
@@ -36,4 +33,7 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
 
     @Query(value = "Select * from car as c LEFT OUTER JOIN rented_car rc ON c.id = rc.car_id and rc.customer_id = ?1 where rc.car_id is null", nativeQuery = true)
     public List<Car> findAllAvailableCars(@Param("customer") int customer);
+
+    @Query(value = "Select * from car as c LEFT OUTER JOIN rented_car rc ON c.id = rc.car_id and rc.customer_id = ?1 where rc.car_id is null and c.brand = ?2", nativeQuery = true)
+    public List<Car> findByBrand(@Param("customer") int customer,@Param("brand") String brand);
 }
