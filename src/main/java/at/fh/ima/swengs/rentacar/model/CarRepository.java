@@ -19,13 +19,17 @@ public interface CarRepository extends PagingAndSortingRepository<Car, Long> {
 
     public Car findById(@Param("id") long id);
 
-    public List<Car> findByModel(@Param("model") String model);
+    @Query(value = "Select * from car as c LEFT OUTER JOIN rented_car rc ON c.id = rc.car_id and rc.customer_id = ?1 where rc.car_id is null and c.model = ?2", nativeQuery = true)
+    public List<Car> findByModel(@Param("customer") int customer,@Param("model") String model);
 
-    public List<Car> findBySeatNumber(@Param("seatNumber") int seatNumber);
+    @Query(value = "Select * from car as c LEFT OUTER JOIN rented_car rc ON c.id = rc.car_id and rc.customer_id = ?1 where rc.car_id is null and c.seat_number = ?2", nativeQuery = true)
+    public List<Car> findBySeatNumber(@Param("customer") int customer, @Param("seatNumber") int seatNumber);
 
-    public List<Car> findByGasType(@Param("gasType") String gasType);
+    @Query(value = "Select * from car as c LEFT OUTER JOIN rented_car rc ON c.id = rc.car_id and rc.customer_id = ?1 where rc.car_id is null and c.gas_type = ?2", nativeQuery = true)
+    public List<Car> findByGasType(@Param("customer") int customer, @Param("gasType") String gasType);
 
-    public List<Car> findByTransmission(@Param("transmission") String transmission);
+    @Query(value = "Select * from car as c LEFT OUTER JOIN rented_car rc ON c.id = rc.car_id and rc.customer_id = ?1 where rc.car_id is null and c.transmission = ?2", nativeQuery = true)
+    public List<Car> findByTransmission(@Param("customer") int customer, @Param("transmission") String transmission);
 
     @Query(value = "SELECT c.*, rc.lease_time from car c JOIN rented_car rc on c.id = rc.car_id WHERE rc.customer_id = ?1", nativeQuery = true)
     public List<Car> findByCustomer(@Param("customer") int customer);
