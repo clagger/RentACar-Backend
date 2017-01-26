@@ -28,12 +28,13 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         .antMatchers(HttpMethod.POST,"/customers").authenticated()
 
         .and().anonymous().disable().requestMatchers()
-        .antMatchers(HttpMethod.GET,"/customers/**","/cars/**","/rentedCars/**","/profile/*")
-        .antMatchers(HttpMethod.DELETE,"/customers/*","/cars/*","/rentedCars/*","/profile/*")
-        .antMatchers(HttpMethod.PUT,"/customers/*","/cars/*","/rentedCars/*","/profile/*")
-        .antMatchers(HttpMethod.POST,"/cars","/rentedCars","/profile/*")
+        .antMatchers(HttpMethod.GET,"/customers/**","/cars/**","/rentedCars/**","/carLeaseTimes/**","/profile/*")
+        .antMatchers(HttpMethod.DELETE,"/customers/*","/cars/*","/rentedCars/*", "/carLeaseTimes/**","/profile/*")
+        .antMatchers(HttpMethod.PUT,"/customers/*","/cars/*","/rentedCars/*","/carLeaseTimes/**","/profile/*")
+        .antMatchers(HttpMethod.PATCH, "/customers/*")
+        .antMatchers(HttpMethod.POST,"/cars","/rentedCars", "/carLeaseTimes/**","/profile/*")
         .and().authorizeRequests()
-        .antMatchers("/cars/**","/customers/**","/rentedCars/**").access("hasRole('ADMIN') or hasRole('USER')")
+        .antMatchers("/cars/**","/customers/**","/rentedCars/**", "/carLeaseTimes/**").access("hasRole('ADMIN') or hasRole('USER')")
         .antMatchers("/profile/**").access("hasRole('ADMIN')")
         .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
