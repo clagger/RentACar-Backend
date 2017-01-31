@@ -13,25 +13,14 @@ import java.util.List;
  * Created by Amar on 12.01.2017.
  */
 
-/**
- * http://docs.spring.io/spring-data/rest/docs/current/reference/html/
- */
+
 @RepositoryRestResource
-public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
-    //This would be exposed under the URL: http://localhost:8080/customers/search/findByFirstNameAndLastName?firstName="NAME"&lastName="NAME"
-    public List<Customer> findByFirstNameAndLastName(@Param("firstName") String firstName, @Param("lastName")String lastName);
-
-    public List<Customer> findByEmail(@Param("email") String email);
-
+    /**
+     * Is needed for the Customers which implements UserDetailService in order to search for customer by email!
+     */
+    Customer findByEmail(@Param("email") String email);
 }
 
 
-/**
- * Is needed for the Customers which implements UserDetailService in order to search for customer by email!
- */
-
-@Repository
-interface CustomerRepository2 extends CrudRepository<Customer, Long> {
-    Customer findByEmail(String email);
-}

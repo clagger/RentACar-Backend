@@ -23,10 +23,10 @@ import java.util.List;
 @Service
 public class Customers implements UserDetailsService {
 
-    private CustomerRepository2 repo;
+    private CustomerRepository repo;
 
     @Autowired
-    public Customers(CustomerRepository2 repo) {
+    public Customers(CustomerRepository repo) {
         this.repo = repo;
     }
 
